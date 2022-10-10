@@ -146,6 +146,9 @@ async function main() {
 
   console.log("Encoded proposal for PolkdotXcmSend is %s", batchCall.method.toHex() || "");
 
+  const techPropose = await api.tx.technicalCommittee.propose(1, batchCall, batchCall.method.encodedLength);
+  console.log("Encoded proposal as tech comittee motion is %s", techPropose.method.toHex() || "");
+
   const toPropose = args["at-block"]
     ? api.tx.scheduler.schedule(args["at-block"], null, 0, { Value: batchCall })
     : batchCall;
